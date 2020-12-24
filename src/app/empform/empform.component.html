@@ -1,0 +1,127 @@
+<h3 id="title">EMPLOYEE REGISTRATION FORM</h3>
+<form class="decor" name="form" [formGroup]="form"  (ngSubmit)="onSubmit()">
+    <!-- First Name & Last Name -->
+    <div class="style">
+        <mat-form-field appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="fname" placeholder="Say: Divya" required>
+            <mat-error *ngIf="form.controls['fname'].errors?.FirstNameisEmpty">First Name Can't be Empty!</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="space">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lname" placeholder="Say: Bharathi" required>
+            <mat-error *ngIf="form.controls['lname'].errors?.LastNameisEmpty">Last Name Can't be Empty!</mat-error>  
+        </mat-form-field>
+    </div>
+    
+    <!-- Gender -->
+    <div class="style">
+        <label id="radio-group-label">Pick Your Gender</label>
+        <mat-radio-group aria-labelledby="radio-group-label" formControlName="gender" class="radio-group" color="primary">
+          <mat-radio-button class="radio-button"  value="1">Female</mat-radio-button>
+          <mat-radio-button class="radio-button"  value="2">Male</mat-radio-button>   
+          <mat-radio-button class="radio-button"  value="3">Other</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <!-- Date of Birth -->
+    <div class="style">
+        <mat-form-field appearance="fill">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dob">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>  
+    
+    <!-- Profile Picture -->
+    <div class="style">
+        <label for="img">Profile Image: </label>
+        <input type="file" id="img" name="img" formControlName="img">
+    </div><br>
+
+    <!-- Educational Qualification -->
+    <div class="style" >
+        <mat-label>Educational Qualification: </mat-label>
+        &nbsp;
+        <button mat-raised-button color="primary" (click)="openDialog()" class="fill" type="button">Add</button><br><br>
+        <table mat-table [dataSource]="this.service.dataSource" class = "mat-elevation-z8"> 
+            <ng-container matColumnDef = "qualification">
+               <th mat-header-cell style="text-align: center;" *matHeaderCellDef> Qualification</th>
+               <td mat-cell *matCellDef="let data"> {{data.qualification}} </td>
+            </ng-container>
+            <ng-container matColumnDef = "year">
+               <th mat-header-cell style="text-align: center;" *matHeaderCellDef>Year of passing</th>
+               <td mat-cell *matCellDef="let data"> {{data.year}} </td>
+            </ng-container>
+            <ng-container matColumnDef = "percentage">
+               <th mat-header-cell style="text-align: center;" *matHeaderCellDef>Percentage</th>
+               <td mat-cell *matCellDef="let data"> {{data.percentage}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell style="text-align: center;" *matHeaderCellDef>Actions</th>
+                <td align="center" mat-cell *matCellDef="let data; let i=index;">
+                    <button mat-mini-fab type="button" (click)="doEdit(i)" color="primary" aria-label="Exam">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    &nbsp;
+                    <button mat-mini-fab type="button" (click)="doDelete(i)" class="space" color="primary" aria-label="Exam">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td> 
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef = "displayedColumns"></tr>
+            <tr mat-row *matRowDef = "let row; columns: displayedColumns; let i=index"></tr>
+            
+         </table>        
+    </div>
+    <br>
+
+    <!-- Hobbies & Extra-Curricular Activities-->
+    <div class="style"> 
+        <mat-label>Hobbies & Extra-Curricular Activities: </mat-label>
+        &nbsp;
+        <button mat-raised-button color="primary" type="button" (click)="openDialogBox()" >Add</button><br>
+    </div><br>
+
+    <!-- Extra-Curricular Activities-->
+    <div class="style">  
+        <mat-label>Extra-Curricular Activities: </mat-label>
+        &nbsp;
+        <button mat-raised-button color="primary" type="button" (click)="openEDialog()" >Add</button><br>
+    </div><br>
+
+    <!-- State & Country -->
+    <div class="style">
+        <mat-form-field appearance="fill">
+            <mat-label>Choose Country</mat-label>
+            <mat-select formControlName="country" (selectionChange)="onChange($event)" >
+                <mat-option *ngFor="let country of countriesList" [value]="country.country">{{country.country}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="space">
+            <mat-label>Choose State</mat-label>
+            <mat-select formControlName="state">
+                <mat-option *ngFor="let state of states" value="{{state}}">{{state}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>  
+    
+    <!-- Zipcode -->
+    <div class="style">
+        <mat-form-field appearance="fill">
+            <mat-label>Zipcode</mat-label>
+            <input matInput placeholder="Say: 625010" formControlName="zip" required>
+            <mat-error *ngIf="form.controls['zip'].errors?.required">Zipcode Can't be Empty!</mat-error>
+            <mat-error *ngIf="form.controls['zip'].errors?.minlength">Zipcode Should Have 6 Characters!</mat-error>
+        </mat-form-field>
+    </div>
+
+    <!-- Submit & Reset -->
+    <div class="button-row">
+        <button mat-raised-button (click)=clearData() type="reset" class="arrange" color="primary">Reset</button>
+        &nbsp;&nbsp;
+        <button mat-raised-button type="submit" [disabled]="form.invalid" class="arrange" color="primary">Submit</button>
+    </div>
+</form>

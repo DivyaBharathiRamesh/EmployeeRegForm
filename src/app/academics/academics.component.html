@@ -1,0 +1,32 @@
+<form class="ddecor" name="dform" [formGroup]="dform" (ngSubmit)="onSave()">
+    <div class="dialog">
+        <mat-form-field appearance="fill">
+            <mat-label>Graduation</mat-label>
+            <mat-select (selectionChange)="calibrateSelect()" (click)="calibrateSelect()" formControlName="qualification">
+                <mat-option *ngFor="let acad of cloneData"[value]="acad">{{acad}}</mat-option>
+            </mat-select>
+        </mat-form-field> 
+    </div>     
+    <div class="dialog">
+        <mat-form-field appearance="fill">
+            <mat-label>Year of Passing</mat-label>
+            <input matInput formControlName="year" value="{{data.year}}" placeholder="Say: 2010">
+            <mat-error *ngIf="dform.controls['year'].errors?.YearisEmpty">Year Can't be Empty</mat-error>
+            <mat-error *ngIf="dform.controls['year'].errors?.InvalidYear">Invalid Year!</mat-error>
+        </mat-form-field>
+    </div>    
+    <div class="dialog">   
+        <mat-form-field appearance="fill">
+            <mat-label>Percentage</mat-label>
+            <input matInput formControlName="percentage" placeholder="Say 80">
+            <span matSuffix>%</span>
+            <mat-error *ngIf="dform.controls['percentage'].errors?.PercentageisEmpty">Percentage Can't be Empty</mat-error>
+            <mat-error *ngIf="dform.controls['percentage'].errors?.InvalidPercentage">Invalid Percentage!</mat-error>
+        </mat-form-field>
+    </div>
+    <div align="center">
+        <button mat-raised-button color="primary" type="submit" >Save</button>
+        &nbsp;
+        <button mat-raised-button type="reset" (click)="onClose()">Cancel</button>
+    </div>
+</form>
