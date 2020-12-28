@@ -14,9 +14,9 @@ export class ExtraComponent implements OnInit {
   extra: string;
   extras=[
     {id:"1", extra:"Volunteer Works"},
-    {id:"2", extra:"Athletics"},
-    {id:"3", extra:"Culture Clubs"},
-    {id:"4", extra:"Art & Crafts"}
+    {id:"2", extra:"Sports & Athletics"},
+    {id:"3", extra:"Arts & Crafts"},
+    {id:"4", extra:"Culture Clubs"}
   ]
   onChecked(e)
   {
