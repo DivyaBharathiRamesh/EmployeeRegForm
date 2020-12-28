@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { EmpformService } from "../service/eform.service";
 
 @Component({
   selector: 'app-hobbies',
@@ -7,7 +8,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./hobbies.component.css']
 })
 export class HobbiesComponent implements OnInit {
-  constructor(public dialogRef: MatDialogRef<HobbiesComponent>) { }
+  constructor(public dialogRef: MatDialogRef<HobbiesComponent>,public service: EmpformService) { }
   dataArray =[];
   hobby: string;
   hobbies=[
@@ -25,10 +26,11 @@ export class HobbiesComponent implements OnInit {
   }
   saveHobby()
   {
-    console.log(this.dataArray);
+    this.service.allData.push(this.dataArray);
+    this.service.hobbies=this.dataArray;
+    //console.log(this.dataArray);
     this.dialogRef.close();
   }
-
   ngOnInit(): void {
   }
 

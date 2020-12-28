@@ -1,0 +1,71 @@
+<!-- <mat-button><a routerLink="">Back</a></mat-button> -->
+<!-- <div class="button-row">
+    <button mat-raised-button color="primary">
+        <a routerLink="">Back</a>
+    </button>
+</div> -->
+<h3 id="title"><strong>EMPLOYEE REGISTRATION FORM</strong></h3>
+<div class="bar pointer" (click)="isHidden = !isHidden">
+    <h5><strong>View Details</strong></h5>
+</div>
+<div [hidden]="isHidden">
+    <div>
+        <table class="table table-striped">
+            <tr>
+                <td align="center" colspan="2"><strong>{{fname | uppercase}} {{lname | uppercase}}</strong>
+                <br>
+                <img [src]="this.service.imgurl" height="200 px" width="200 px" ></td>
+            </tr> 
+            <!-- <tr>
+                <td><strong>Name: </strong></td>
+                <td>{{fname}} {{lname}}</td>
+            </tr>  -->
+            <tr>
+                <td><strong>Gender: </strong></td>
+                <td>{{gender}}</td>
+            </tr> 
+            <tr>
+                <td><strong>Date of Birth: </strong></td>
+                <td>{{dob | date:'longDate'}}</td>
+            </tr>  
+            <tr>
+                <td><strong>Educational Qualification: </strong></td>
+                <td>
+                    <tr>
+                        <th>Qualification</th>
+                        <th>Year</th>
+                        <th>Percentage</th>
+                    </tr>
+                    <tr *ngFor="let elem of this.service.dataSource.data">
+                        <td>{{elem.qualification}}</td>
+                        <td>{{elem.year}}</td>
+                        <td>{{elem.percentage}}</td>
+                    </tr>
+            </tr> 
+            <tr>
+                <td><strong>Hobby: </strong></td>
+                <td>
+                    <div *ngFor="let hobbies of hobby">{{hobbies}}</div>
+                </td>
+            </tr> 
+            <tr>
+                <td><strong>Extra-Curricular Activities: </strong></td>
+                <td>
+                    <div *ngFor="let extras of extra">{{extras}}</div>
+                </td>
+            </tr> 
+            <tr>
+                <td><strong>Country: </strong></td>
+                <td>{{country}}</td>
+            </tr>  
+            <tr>
+                <td><strong>State: </strong></td>
+                <td>{{state}}</td>
+            </tr>    
+            <tr>
+                <td><strong>Zipcode: </strong></td>
+                <td>{{zip}}</td>
+            </tr>           
+        </table>
+    </div>
+</div>

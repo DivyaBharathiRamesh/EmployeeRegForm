@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { EmpformService } from '../service/eform.service';
 
 @Component({
   selector: 'app-extra',
@@ -7,7 +8,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./extra.component.css']
 })
 export class ExtraComponent implements OnInit {
-  constructor(public dialogRef: MatDialogRef<ExtraComponent>) { }
+  constructor(public dialogRef: MatDialogRef<ExtraComponent>,public service: EmpformService) { }
 
   dataEArray =[];
   extra: string;
@@ -26,7 +27,10 @@ export class ExtraComponent implements OnInit {
   }
   saveCurricular()
   {
-    console.log(this.dataEArray);
+    this.service.allData.push(this.dataEArray);
+    this.service.extra=this.dataEArray;
+
+    //console.log(this.dataEArray);
     this.dialogRef.close();
   }
   

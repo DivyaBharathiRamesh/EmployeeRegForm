@@ -24,6 +24,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EmpformService } from '../app/service/eform.service';
 import { MatListModule } from '@angular/material/list';
 import { ExtraComponent } from './extra/extra.component';
+import { DisplayComponent } from './display/display.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -32,13 +36,14 @@ import { ExtraComponent } from './extra/extra.component';
     AcademicsComponent,
     HobbiesComponent,
     ExtraComponent,
+    DisplayComponent,
   ],
   imports: [
     BrowserModule,MatFileUploadModule, MatToolbarModule, MatSelectModule,
     AppRoutingModule,MatNativeDateModule, MatDialogModule, MatIconModule,
     BrowserAnimationsModule,MatDatepickerModule, MatTableModule,MatCheckboxModule,
     ReactiveFormsModule,FormsModule, MatRadioModule,MatCardModule, MatListModule,
-    MatFormFieldModule, MatInputModule, MatButtonModule
+    MatFormFieldModule, MatInputModule, MatButtonModule,MatGridListModule, NgbModule
   ],
   entryComponents: [AcademicsComponent,HobbiesComponent],
   providers: [EmpformService],

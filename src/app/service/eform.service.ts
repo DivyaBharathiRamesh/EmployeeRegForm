@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
-
 export interface Details {
   qualification: string;
   year: string;
@@ -9,12 +8,9 @@ export interface Details {
 }
 const Data: Details[] = [
 ];
-
-
 @Injectable({
   providedIn: 'root'
 })
-
 export class EmpformService {
   id = null;
   academics=[
@@ -24,6 +20,12 @@ export class EmpformService {
     {id:"4", grade:"Post Graduate"},
   ]
   dataSource = new MatTableDataSource(Data);
+  allData = [];
+  extra =[];
+  hobbies = [];
+  
+  public imgurl ;
+  value: any;
   shareId() {
     return this.id;
   }

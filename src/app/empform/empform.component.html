@@ -1,4 +1,4 @@
-<h3 id="title">EMPLOYEE REGISTRATION FORM</h3>
+<h3 id="title"><strong>EMPLOYEE REGISTRATION FORM</strong></h3>
 <form class="decor" name="form" [formGroup]="form"  (ngSubmit)="onSubmit()">
     <!-- First Name & Last Name -->
     <div class="style">
@@ -18,9 +18,9 @@
     <div class="style">
         <label id="radio-group-label">Pick Your Gender</label>
         <mat-radio-group aria-labelledby="radio-group-label" formControlName="gender" class="radio-group" color="primary">
-          <mat-radio-button class="radio-button"  value="1">Female</mat-radio-button>
-          <mat-radio-button class="radio-button"  value="2">Male</mat-radio-button>   
-          <mat-radio-button class="radio-button"  value="3">Other</mat-radio-button>
+          <mat-radio-button class="radio-button" value="Female" class="space">Female</mat-radio-button>
+          <mat-radio-button class="radio-button" value="Male" class="space">Male</mat-radio-button>   
+          <mat-radio-button class="radio-button" value="Other" class="space">Other</mat-radio-button>
         </mat-radio-group>
     </div>
 
@@ -37,7 +37,7 @@
     <!-- Profile Picture -->
     <div class="style">
         <label for="img">Profile Image: </label>
-        <input type="file" id="img" name="img" formControlName="img">
+        <input type="file" id="img" (change)="onSelectFile($event)" name="img" formControlName="img">
     </div><br>
 
     <!-- Educational Qualification -->
@@ -61,19 +61,17 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell style="text-align: center;" *matHeaderCellDef>Actions</th>
                 <td align="center" mat-cell *matCellDef="let data; let i=index;">
-                    <button mat-mini-fab type="button" (click)="doEdit(i)" color="primary" aria-label="Exam">
+                    <button mat-icon-button  type="button" (click)="doEdit(i)"  aria-label="Exam">
                         <mat-icon>edit</mat-icon>
                     </button>
                     &nbsp;
-                    <button mat-mini-fab type="button" (click)="doDelete(i)" class="space" color="primary" aria-label="Exam">
+                    <button mat-icon-button type="button" (click)="doDelete(i)" class="space" color="warn" aria-label="Exam">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td> 
             </ng-container>
-            
             <tr mat-header-row *matHeaderRowDef = "displayedColumns"></tr>
-            <tr mat-row *matRowDef = "let row; columns: displayedColumns; let i=index"></tr>
-            
+            <tr mat-row *matRowDef = "let row; columns: displayedColumns; let i=index"></tr>    
          </table>        
     </div>
     <br>

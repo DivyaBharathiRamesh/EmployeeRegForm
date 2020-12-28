@@ -44,6 +44,7 @@ export class AcademicsComponent implements OnInit {
    }
   onClose(): void {
     this.dialogRef.close();
+    //console.log(this.dform);
   }
   onSave(){
     if(this.dform.valid)
@@ -58,7 +59,7 @@ export class AcademicsComponent implements OnInit {
       }
       this.service.dataSource._updateChangeSubscription();
       this.dialogRef.close();    
-      console.log(this.service.dataSource.data);
+      //console.log(this.service.dataSource.data);
     }
   }
   onSet(){
@@ -76,7 +77,7 @@ export class AcademicsComponent implements OnInit {
   ngOnInit(){
     this.calibrateSelect();
     this.index=this.service.shareId();
-    console.log(this.index);
+    //console.log(this.index);
     if(this.index==null)
     {
       this.data= {qualification:null,year:null,percentage:null};
@@ -92,6 +93,5 @@ export class AcademicsComponent implements OnInit {
       percentage : new FormControl(this.data.percentage,PercentageValidator())
     }); 
     this.service.setId(null);
-
   }
 } 

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog,MatDialogRef,MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from "@angular/material/dialog";
 import { AcademicsComponent } from '../academics/academics.component';
 import  countryList  from "../../assets/countries.json";
 import { HobbiesComponent } from '../hobbies/hobbies.component';
@@ -7,8 +7,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { FirstNameValidator,LastNameValidator, PercentageValidator, YearValidator } from "../utils/validators";
 import { EmpformService } from "../service/eform.service";
 import { ExtraComponent } from '../extra/extra.component';
-
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-empform',
   templateUrl: './empform.component.html',
@@ -16,9 +15,9 @@ import { ExtraComponent } from '../extra/extra.component';
 })
 export class EmpformComponent implements OnInit {
   len: any;
+  
 
- 
-constructor(public dialog: MatDialog, public service: EmpformService) {  }
+constructor(public dialog: MatDialog, public service: EmpformService, private router: Router) {  }
 openDialog(): void {
   const dialogRef = this.dialog.open(AcademicsComponent, {
     height: '380px',
@@ -32,7 +31,16 @@ openDialogBox(): void {
     width: '320px',
   });
 } 
-
+onSelectFile(event): void {
+  if(event.target.files && event.target.files[0])
+  {
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (event) => {
+    this.service.imgurl=event.target.result;
+    }
+  }
+}
 openEDialog(): void {
   const dialogRef = this.dialog.open(ExtraComponent, {
     height: '380px',
@@ -41,13 +49,12 @@ openEDialog(): void {
 }
 
 displayedColumns: string[] = ['qualification', 'year', 'percentage','actions'];
-
+public imagePath;
 countriesList = countryList.countries;
 states = [];
 
   ngOnInit() {
-  }
-
+  } 
   clearData(){
     this.form.reset();
     this.initializeFormGroup();
@@ -56,8 +63,9 @@ states = [];
     this.service.dataSource._updateChangeSubscription();
   }
   onSubmit(){
-    console.log(this.form);
-    alert("Form Submitted");
+    this.service.allData=this.form.value;
+    console.log(this.service.allData);
+    this.router.navigate(["/display"]);
   }  
   onChange(e){
     this.countriesList.map((country)=>{
@@ -109,11 +117,9 @@ states = [];
         percentage : ''
       });
     }
-  
     dform: FormGroup = new FormGroup({
       qualification : new FormControl('',Validators.required),
       year : new FormControl('',[Validators.required,YearValidator()]),
       percentage : new FormControl('',[Validators.required,PercentageValidator()])
-    }); 
-  
+    });   
 }
